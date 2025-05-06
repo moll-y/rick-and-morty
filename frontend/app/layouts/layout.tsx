@@ -1,4 +1,5 @@
-import { Outlet, Link } from "react-router";
+import type { Route } from "./+types/layout";
+import { Outlet, Link, useLoaderData } from "react-router";
 import { useState } from "react";
 import { MagnifyingGlassIcon, ArrowLeftIcon } from "@heroicons/react/16/solid";
 import {
@@ -7,12 +8,49 @@ import {
 } from "@heroicons/react/24/outline";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 
-export default function Dashboard() {
+export async function clientLoader({
+  params,
+}: Route.ClientLoaderArgs): Promise<{
+  characters: {
+    id: number;
+    name: string;
+    status: string;
+    species: string;
+    origin: string;
+    imageUrl: string;
+  }[];
+}> {
+  const response = await fetch("http://localhost:4000/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+      query GetAllCharacters {
+        characters {
+          id
+          name
+          status
+          species
+          origin
+          imageUrl
+        }
+      }
+    `,
+    }),
+  });
+  const json = await response.json();
+  return { characters: json.data.characters };
+}
+
+export default function Character({ loaderData }: Route.ComponentProps) {
+  const { characters } = loaderData;
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selected, setSelected] = useState(false);
   return (
     <main className="flex relative">
-      <div className="w-full max-w-md px-6 bg-white md:bg-gray-50 h-screen">
+      <div className="w-full max-w-md px-6 bg-white md:bg-gray-50 h-screen overflow-y-scroll">
         <header className="pt-10 pb-2">
           <h1 className="text-2xl font-bold leading-8 text-gray-800 md:font-normal">
             Rick and Morty list
@@ -87,39 +125,41 @@ export default function Dashboard() {
         </div>
         <div>
           <h3 className="py-4 leading-4 text-xs font-semibold tracking-wider text-gray-500">
-            CHARACTERS (4)
+            CHARACTERS ({characters.length})
           </h3>
           <ul>
-            <li>
-              <a
-                href="#"
-                className="group block shrink-0 py-4 border-t border-t-gray-200"
-              >
-                <div className="flex items-center">
-                  <div>
-                    <img
-                      alt=""
-                      src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-                      className="inline-block size-9 rounded-full"
-                    />
+            {characters.map(({ id, name, species, imageUrl }) => (
+              <li key={id}>
+                <Link
+                  to={"/character/" + id}
+                  className="group block shrink-0 py-4 border-t border-t-gray-200"
+                >
+                  <div className="flex items-center">
+                    <div>
+                      <img
+                        alt=""
+                        src={imageUrl}
+                        className="inline-block size-9 rounded-full"
+                      />
+                    </div>
+                    <div className="ml-4">
+                      <p className="text-base leading-6 font-semibold text-gray-900">
+                        {name}
+                      </p>
+                      <p className="text-base leading-6 font-normal text-gray-500">
+                        {species}
+                      </p>
+                    </div>
+                    <div className="ml-auto">
+                      <HeartIcon
+                        aria-hidden="true"
+                        className="ml-auto size-7 text-gray-300 stroke-2"
+                      />
+                    </div>
                   </div>
-                  <div className="ml-4">
-                    <p className="text-base leading-6 font-semibold text-gray-900">
-                      Abadango Cluster Pricess
-                    </p>
-                    <p className="text-base leading-6 font-normal text-gray-500">
-                      Alien
-                    </p>
-                  </div>
-                  <div className="ml-auto">
-                    <HeartIcon
-                      aria-hidden="true"
-                      className="ml-auto size-7 text-gray-300 stroke-2"
-                    />
-                  </div>
-                </div>
-              </a>
-            </li>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
