@@ -11,14 +11,14 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selected, setSelected] = useState(false);
   return (
-    <main className="flex items-center justify-center px-6 relative">
-      <div className="w-full">
+    <main className="flex relative">
+      <div className="w-full max-w-md px-6 bg-white md:bg-gray-50 h-screen">
         <header className="pt-10 pb-2">
-          <h1 className="text-2xl font-bold leading-8 text-gray-800">
+          <h1 className="text-2xl font-bold leading-8 text-gray-800 md:font-normal">
             Rick and Morty list
           </h1>
         </header>
-        <div className="py-4">
+        <div className="py-4 md:pt-4 md:pb-16">
           <div className="flex">
             <div className="-mr-px grid grow grid-cols-1 focus-within:relative">
               <input
@@ -52,7 +52,7 @@ export default function Dashboard() {
             <li>
               <Link
                 to="character/1"
-                className="group block shrink-0 py-4 border-t border-t-gray-200 cursor-pointer"
+                className="group block outline-none shrink-0 py-4 border-t border-t-gray-200 cursor-pointer"
                 onClick={() => {
                   setSidebarOpen(true);
                 }}
@@ -61,7 +61,7 @@ export default function Dashboard() {
                   <div>
                     <img
                       alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
                       className="inline-block size-9 rounded-full"
                     />
                   </div>
@@ -99,7 +99,7 @@ export default function Dashboard() {
                   <div>
                     <img
                       alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
                       className="inline-block size-9 rounded-full"
                     />
                   </div>
@@ -122,6 +122,9 @@ export default function Dashboard() {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="hidden md:block w-full">
+        <Outlet />
       </div>
       <Dialog
         open={sidebarOpen}

@@ -6,13 +6,13 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/outline";
 
-export function meta({}: Route.MetaArgs) {
+export function meta(_: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Rick and Morty" },
+    { name: "description", content: "Welcome to Rick and Morty!" },
   ];
 }
 
-export default function Character() {
+export default function Home() {
   return <></>;
 }

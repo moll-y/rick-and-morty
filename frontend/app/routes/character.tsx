@@ -3,22 +3,21 @@ import { Link } from "react-router";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { HeartIcon } from "@heroicons/react/24/outline";
 
-export function meta({}: Route.MetaArgs) {
+export function meta(_: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Rick and Morty - Character's details" },
+    { name: "description", content: "Rick and Morty - Character's details" },
   ];
 }
 
 export default function Character({ params }: Route.ComponentProps) {
-  console.log("params: ", params);
   return (
-    <div>
-      <div className="pb-2">
+    <div className="md:px-32 md:pt-10">
+      <div className="pb-2 ">
         <span className="relative inline-block">
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
             className="size-16 rounded-full"
           />
           <div className="absolute -right-3.5 bottom-0 flex justify-center items-center size-7 rounded-full bg-white ring-2 ring-white">
