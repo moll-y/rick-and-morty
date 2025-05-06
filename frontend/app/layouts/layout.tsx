@@ -133,6 +133,9 @@ export default function Character({ loaderData }: Route.ComponentProps) {
                 <Link
                   to={"/character/" + id}
                   className="group block shrink-0 py-4 border-t border-t-gray-200"
+                  onClick={() => {
+                    setSidebarOpen(true);
+                  }}
                 >
                   <div className="flex items-center">
                     <div>
