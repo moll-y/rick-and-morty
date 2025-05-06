@@ -18,14 +18,14 @@ erDiagram
     string species "The species of the character."
     string gender "The gender of the character ('Female', 'Male', 'Genderless' or 'unknown')."
     string origin "Name of the character's origin location."
-    string image_url "Link to the character's image (300x300px)."
-    string created_at "Time at which the character was created in the database."
+    string imageUrl "Link to the character's image (300x300px)."
+    string createdAt "Time at which the character was created in the database."
   }
   COMMENT {
     int id PK
-    int character_id FK
+    int characterId FK
     string text "The content of the comment as plain text."
-    string created_at "Time at which the character was created in the database."
+    string createdAt "Time at which the character was created in the database."
   }
 ```
 
