@@ -5,7 +5,7 @@
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
+    "start": "npx serve -s build/client",
     "typecheck": "react-router typegen && tsc",
     "format": "npx prettier -w ./app"
   },
@@ -26,6 +26,7 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "prettier": "3.5.3",
+    "serve": "^14.2.4",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",

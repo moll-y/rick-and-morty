@@ -39,6 +39,7 @@ export class GraphController {
         Alien
       }
       type Query { 
+        character(id: Int): Character
         characters(name: String, status: Status, species: Species, origin: String): [Character!]!
       }
       type Mutation {
@@ -140,7 +141,6 @@ export class GraphController {
     species?: string;
     origin?: string;
   }): { key: string; where: WhereOptions } {
-    // So this doesn't gets confused with get character by id.
     let key = "where:";
     const where: WhereOptions = {};
     if (status) {

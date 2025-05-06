@@ -8,6 +8,7 @@
     "lint": "npx eslint src/"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "4.21.2",
     "graphql": "^16.11.0",
@@ -17,11 +18,11 @@
     "node-cron": "^3.0.3",
     "pg": "^8.15.6",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.7",
-    "tsconfig-paths": "^4.2.0"
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
+    "@types/cors": "^2.8.17",
     "@types/express": "5.0.1",
     "@types/node": "^22.15.5",
     "@types/node-cron": "^3.0.11",
@@ -30,6 +31,7 @@
     "prettier": "3.5.3",
     "sequelize-cli": "^6.6.2",
     "ts-node": "10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "5.8.2",
     "typescript-eslint": "^8.31.1"
   }

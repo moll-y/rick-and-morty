@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "toor",
+    "database": "rick_and_morty",
+    "host": "database",
+    "dialect": "postgres"
+  }
+}

@@ -5,17 +5,18 @@ import { GraphController } from "api/graphql.controller";
 import { middleware } from "middleware";
 import express from "express";
 import cron from "node-cron";
+import cors from "cors";
 
 const app = express();
-const redis = new Redis();
+const redis = new Redis(6379, "cache");
 const controller = new GraphController(redis);
 
 cron.schedule("* * * * *", () => {
   //cron.schedule('0 */12 * * *', () => {
   console.log("Cron job is running every 12 hours");
-  // Your task here (e.g., sending emails, cleaning up data, etc.)
 });
 
+app.use(cors());
 app.use(middleware);
 
 app.all(
